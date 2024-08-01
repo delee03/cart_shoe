@@ -1,15 +1,17 @@
 import React from "react";
 
-const ShoeModel = ({ isOpen, onClose, shoeSelected }) => {
+const ShoeModel = ({ isOpen, onClose, cart }) => {
     if (!isOpen) return null;
-    let { image, price, id, name } = shoeSelected;
     return (
         <div
             id="default-modal"
             tabIndex={-1}
             className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
         >
-            <div className="relative p-4 w-full max-w-2xl max-h-full">
+            <div
+                style={{ maxWidth: "55rem" }}
+                className="relative p-4 w-full  max-h-full"
+            >
                 {/* Modal content */}
                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     {/* Modal header */}
@@ -56,23 +58,31 @@ const ShoeModel = ({ isOpen, onClose, shoeSelected }) => {
                                 </tr>
                             </thead>
                             <tbody className="text-white">
-                                <tr className="text-center">
-                                    <td>{id}</td>
-                                    <td>
-                                        <img
-                                            src={image}
-                                            alt="..."
-                                            className="w-12 h-12 object-cover rounded-full"
-                                        />
-                                    </td>
-                                    <td>{name}</td>
-                                    <td>1</td>
-                                    <td>{price}</td>
-                                    <td>{price * 1}</td>
-                                    <td className="bg-red-500 px-2 py-1 rounded-md text-white">
-                                        Xóa
-                                    </td>
-                                </tr>
+                                {cart.map((item, index) => {
+                                    return (
+                                        <tr className="text-center" key={index}>
+                                            <td>{item.id}</td>
+                                            <td>
+                                                <img
+                                                    src={item.image}
+                                                    alt="..."
+                                                    className="w-12 h-12 object-cover rounded-full"
+                                                />
+                                            </td>
+                                            <td>{item.name}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>{item.price}</td>
+                                            <td>
+                                                {item.price * item.quantity}
+                                            </td>
+                                            <td>
+                                                <button className="bg-red-500 text-xs font-medium me-2 px-2.5 py-1.5 rounded  text-white">
+                                                    Xóa
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     </div>
