@@ -21,14 +21,17 @@ const HomePage = () => {
             to: path.shoepage,
             content: "Shoe Store",
         },
-
         {
             to: "/about",
-            content: "About",
+            content: "Đại lý",
         },
         {
             to: "/page",
-            content: "Trang",
+            content: "Chính sách",
+        },
+        {
+            to: "/page",
+            content: "Điều khoản",
         },
     ];
     return (
@@ -36,7 +39,7 @@ const HomePage = () => {
             <Header
                 style={{
                     padding: "30px",
-                    minHeight: "20vh",
+                    minHeight: "10vh",
                     display: "flex",
                     alignItems: "center",
                     width: "100%",
@@ -51,15 +54,17 @@ const HomePage = () => {
                     />
                 </div>
 
-                <div className="nav-link">
+                <div className="nav-link text-center">
+                    {/* render các nav-link từ mảng arrNavLink là các obj chứa to, content */}
                     {arrNavLink.map((item, index) => {
                         return (
                             <NavLink
                                 to={item.to}
+                                //router dom navlink cung cấp thuộc tính isActive, isPending để ktra active class
                                 className={({ isActive, isPending }) => {
                                     return `" text-lg me-10 " ${
                                         isActive
-                                            ? "text-red-500 font-semibold "
+                                            ? "text-sky-500 font-semibold "
                                             : "text-white"
                                     }`;
                                 }}
@@ -69,8 +74,11 @@ const HomePage = () => {
                         );
                     })}
                 </div>
-                <div className="text-white text-2xl">
-                    Giỏ hàng
+                <div
+                    className="text-white text-2xl"
+                    data-modal-target="default-modal"
+                    data-modal-toggle="default-modal"
+                >
                     <ShoppingCartOutlined />
                 </div>
             </Header>
@@ -80,13 +88,14 @@ const HomePage = () => {
                 }}
             >
                 <div
-                    className="h-screen"
+                    className="min-h-screen"
                     style={{
                         padding: 24,
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}
                 >
+                    {/* thẻ outlet dùng để render nội dung các thẻ component con kế thừa hometemplate */}
                     <Outlet></Outlet>
                 </div>
             </Content>
