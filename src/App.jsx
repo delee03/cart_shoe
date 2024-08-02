@@ -9,6 +9,7 @@ import HomePage from "./template/HomePage";
 import ShoePage from "./components/CartShoe/ShoePage";
 import TrangChu from "./TrangChu";
 import "flowbite/dist/flowbite.min.css";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
     return (
@@ -25,7 +26,7 @@ function App() {
                             element={<ShoePage />}
                         ></Route>
                     </Route>
-                    {/* // <Route path="*" element={<PageNotFound></PageNotFound>}></Route> */}
+                    <Route path="*" element={<PageNotFound />}></Route>
                 </Routes>
             </Router>
         </>
