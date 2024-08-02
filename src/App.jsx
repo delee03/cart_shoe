@@ -8,6 +8,7 @@ import {
 import HomePage from "./template/HomePage";
 import ShoePage from "./components/CartShoe/ShoePage";
 import TrangChu from "./TrangChu";
+import "flowbite/dist/flowbite.min.css";
 
 function App() {
     return (

@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Tooltip } from "flowbite-react";
 
 const ShoeModel = ({ isOpen, onClose, cart, removeItem, handleTangGiam }) => {
     if (!isOpen) return null;
@@ -46,7 +47,7 @@ const ShoeModel = ({ isOpen, onClose, cart, removeItem, handleTangGiam }) => {
                     <div className="p-4 md:p-5 space-y-4">
                         \
                         <table className="w-full">
-                            <thead className="text-white mb-4">
+                            <thead className=" mb-4">
                                 <tr>
                                     <th>Mã SP</th>
                                     <th>Hình ảnh</th>
@@ -57,7 +58,7 @@ const ShoeModel = ({ isOpen, onClose, cart, removeItem, handleTangGiam }) => {
                                     <th>Options</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-white ">
+                            <tbody>
                                 {cart.map((item, index) => {
                                     return (
                                         <tr
@@ -103,14 +104,20 @@ const ShoeModel = ({ isOpen, onClose, cart, removeItem, handleTangGiam }) => {
                                                 {item.price * item.quantity}
                                             </td>
                                             <td>
-                                                <button
-                                                    onClick={() => {
-                                                        removeItem(item.id);
-                                                    }}
-                                                    className="bg-red-500 text-xs font-medium me-2 px-2.5 py-1.5 rounded  text-white"
+                                                <Tooltip
+                                                    content="Bạn có chắc không?"
+                                                    placement="top"
+                                                    trigger="hover"
                                                 >
-                                                    Xóa
-                                                </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            removeItem(item.id);
+                                                        }}
+                                                        className="bg-red-500    text-xs font-medium me-2 px-2.5 py-1.5 rounded  "
+                                                    >
+                                                        Xóa
+                                                    </button>
+                                                </Tooltip>
                                             </td>
                                         </tr>
                                     );
@@ -118,7 +125,7 @@ const ShoeModel = ({ isOpen, onClose, cart, removeItem, handleTangGiam }) => {
                             </tbody>
                             <tfoot>
                                 <td
-                                    className="text-white pt-5 text-lg text-end font-semibold"
+                                    className=" pt-5 text-lg text-end font-semibold"
                                     colSpan={7}
                                 >
                                     Tổng tiền:{" "}
