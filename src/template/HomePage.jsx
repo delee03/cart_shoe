@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout, Menu, theme } from "antd";
+import { Button, Tooltip } from "flowbite-react";
 import "./style.css";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { path } from "../common/path";
@@ -79,7 +80,13 @@ const HomePage = () => {
                     data-modal-target="default-modal"
                     data-modal-toggle="default-modal"
                 >
-                    <ShoppingCartOutlined />
+                    <Tooltip
+                        content="Thuận Phát chưa phát triển chức năng này!"
+                        placement="top"
+                        trigger="hover"
+                    >
+                        <ShoppingCartOutlined />
+                    </Tooltip>
                 </div>
             </Header>
             <Content
@@ -104,7 +111,7 @@ const HomePage = () => {
                     textAlign: "center",
                 }}
             >
-                Ant Design ©{new Date().getFullYear()} Created by Mạnh Phát
+                Ant Design ©{new Date().getFullYear()} Created by Thuận Phát
             </Footer>
         </Layout>
     );
