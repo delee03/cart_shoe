@@ -1,44 +1,10 @@
 import React from "react";
-import { Bounce, toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-const ShoeItem = ({ shoeItem, index, addToCart, updateShoe }) => {
+const ShoeItem = ({ shoeItem, index, addToCart, updateShoe, hamThongBao }) => {
     const { image, name, price } = shoeItem;
 
-    const notify = () =>
-        toast("🥳 Bạn đã thêm vào giỏ thành công!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
-    const handleAddToCart = () => {
-        notify();
-        addToCart(shoeItem);
-    };
     return (
         <>
-            <div>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    transition={Bounce}
-                />
-                <ToastContainer />
-            </div>
             <div>
                 <div
                     key={index}
@@ -114,7 +80,10 @@ const ShoeItem = ({ shoeItem, index, addToCart, updateShoe }) => {
                                 {price + ".000 VND"}
                             </span>
                             <a
-                                onClick={handleAddToCart}
+                                onClick={() => {
+                                    hamThongBao();
+                                    addToCart(shoeItem);
+                                }}
                                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
                             >
                                 Thêm vào giỏ

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShoeModel = ({ isOpen, onClose, cart }) => {
+const ShoeModel = ({ isOpen, onClose, cart, removeItem, handleTangGiam }) => {
     if (!isOpen) return null;
     return (
         <div
@@ -46,7 +46,7 @@ const ShoeModel = ({ isOpen, onClose, cart }) => {
                     <div className="p-4 md:p-5 space-y-4">
                         \
                         <table className="w-full">
-                            <thead className="text-white">
+                            <thead className="text-white mb-4">
                                 <tr>
                                     <th>Mã SP</th>
                                     <th>Hình ảnh</th>
@@ -57,26 +57,58 @@ const ShoeModel = ({ isOpen, onClose, cart }) => {
                                     <th>Options</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-white">
+                            <tbody className="text-white ">
                                 {cart.map((item, index) => {
                                     return (
-                                        <tr className="text-center" key={index}>
+                                        <tr
+                                            className="text-center mt-4"
+                                            key={index}
+                                        >
                                             <td>{item.id}</td>
                                             <td>
                                                 <img
                                                     src={item.image}
                                                     alt="..."
-                                                    className="w-12 h-12 object-cover rounded-full"
+                                                    className="w-full  h-12 object-cover rounded-full"
                                                 />
                                             </td>
                                             <td>{item.name}</td>
-                                            <td>{item.quantity}</td>
+                                            <td>
+                                                <button
+                                                    className="bg-sky-400 text-md font-medium me-2 px-2.5 py-1.5 rounded"
+                                                    onClick={() => {
+                                                        handleTangGiam(
+                                                            item.id,
+                                                            true
+                                                        );
+                                                    }}
+                                                >
+                                                    +
+                                                </button>
+                                                {item.quantity}
+                                                <button
+                                                    className="bg-sky-400 text-md font-medium ms-2 px-2.5 py-1.5 rounded"
+                                                    onClick={() => {
+                                                        handleTangGiam(
+                                                            item.id,
+                                                            false
+                                                        );
+                                                    }}
+                                                >
+                                                    -
+                                                </button>
+                                            </td>
                                             <td>{item.price}</td>
                                             <td>
                                                 {item.price * item.quantity}
                                             </td>
                                             <td>
-                                                <button className="bg-red-500 text-xs font-medium me-2 px-2.5 py-1.5 rounded  text-white">
+                                                <button
+                                                    onClick={() => {
+                                                        removeItem(item.id);
+                                                    }}
+                                                    className="bg-red-500 text-xs font-medium me-2 px-2.5 py-1.5 rounded  text-white"
+                                                >
                                                     Xóa
                                                 </button>
                                             </td>
@@ -84,6 +116,18 @@ const ShoeModel = ({ isOpen, onClose, cart }) => {
                                     );
                                 })}
                             </tbody>
+                            <tfoot>
+                                <td
+                                    className="text-white pt-5 text-lg text-end font-semibold"
+                                    colSpan={7}
+                                >
+                                    Tổng tiền:{" "}
+                                    {cart.reduce((tongTien, item, index) => {
+                                        return (tongTien +=
+                                            item.price * item.quantity);
+                                    }, 0)}
+                                </td>
+                            </tfoot>
                         </table>
                     </div>
                     {/* Modal footer */}
